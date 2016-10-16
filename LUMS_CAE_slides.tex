@@ -1,0 +1,739 @@
+%INITIAL
+\include{begin}
+\include{lecture_SigProc_formulas}
+\title{WFAR3 (LUMS)}
+
+
+%CONDITIONAL
+\setboolean{PrintHandout}{false}
+\mypagenum\ifthenelse{\boolean{PrintHandout}}
+{
+	\pgfpagesuselayout{4 on 1}[a4paper,border shrink=2mm,landscape] 
+}
+{
+	\setboolean{ShowOverlays}{true}
+}
+
+%counters
+\newcounter{cnt_Number}\regtotcounter{cnt_Number}
+\newcounter{cnt_LogicGates}\regtotcounter{cnt_LogicGates}
+\newcounter{cnt_Boolean}\regtotcounter{cnt_Boolean}
+
+%START
+\begin{frame}[plain]
+\logoCAEE\logoCAE
+%\title{3rd German-Pakistani Workshop on Field and Assistive Robotics}
+\title{CAE\\Robotics at CAE\\Residual Vector Quantization}
+\titlepage
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Outline}
+\logoCAE
+\setcounter{tocdepth}{2}	
+\tableofcontents
+\end{frame}
+
+
+
+
+%####################################################################################################
+\section{Introduction}
+%####################################################################################################
+%=======================
+\subsection{\ \ \ \ Bio}
+%=======================
+
+\begin{frame}
+\frametitle{Introduction}
+\framesubtitle{Bio (salman at gatech.edu)}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{changemargin}{-0.24in}{0in}
+\vspace{0.1in}\hspace{0.15in}{\color{red}Education}
+\begin{enumerate}\scriptsize
+\item 1995: BE, US Air Force Academy (EE)
+\item 2008: MS, Georgia Tech (ECE)
+\item 2011: PhD, Georgia Tech \emph{\tiny (Target Tracking Using Residual Vector Quantization)}
+\item 2012: Associate Professor, CAE
+\end{enumerate}
+
+
+\vspace{0.2in}\hspace{0.15in}{\color{red}Research interests}
+\begin{enumerate}\scriptsize
+\item PRML: pattern recognition, machine learning
+\item signal processing, computer vision
+\item robotics
+\end{enumerate}
+
+\vspace{0.2in}\hspace{0.15in}{\color{red}Experience}
+\begin{enumerate}\scriptsize
+\item 1995: US DoD %\emph{\tiny (Washington DC)}
+\item 1999: PAF, developed prototype V/UHF Jammer
+%\begin{itemize}\scriptsize
+%\item PC-bus plug-in hardware
+%\item accompanying software
+%\item off-the-shelf receivers, tuners, amplifiers
+%\item demonstrated in Air Headquarters
+%\end{itemize}
+\item 2001: PAF, simulation of V/UHF jamming scenario \emph{\tiny (demonstrated in AHQ)}
+\item 2002: PAF, Aircraft deployment patterns of IAF fighters \emph{\tiny (CAS appreciation)}
+\item 2003: PAF, Radar triangulation system \emph{\tiny (CAS commendation)}
+\item 2007: Siemens Global CoC for Intelligent Video %\emph{\tiny (Atlanta)}
+\item 2008: Nvidia Video Algorithms Group %\emph{\tiny (Santa Clara)}
+\item 2009: Nvidia Video Research Group  %\emph{\tiny (Santa Clara)}
+\item 2010: Qualcomm Multimedia Research %\emph{\tiny (San Diego)}
+\item 2011: Samsung Research Labs %\emph{\tiny (Dallas)}
+\end{enumerate}
+\end{changemargin}
+\end{frame}
+
+
+
+
+
+
+
+
+%####################################################################################################
+\section{CAE}
+%####################################################################################################
+%=======================
+\subsection{\ \ \ \ History}
+%=======================
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{History}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{figure}
+\centering
+\includegraphics[height=0.3\textheight]{figs/logo_CAE_history.png}
+\end{figure}
+\begin{itemize}
+\item 1965: setup in Korangi Creek, Karachi
+\item 1983: moved to PAF Academy, Risalpur
+\item 1996: affiliated with NUST
+\item 2010: re-accredited by PCE, highest score in country 
+\end{itemize}
+%\Acrobatmenu{GoBack}{\beamerreturnbutton{back}}
+\end{frame}
+
+
+%=======================
+\subsection{\ \ \ \ Departments}
+%=======================
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Departments}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{enumerate}
+\item Avionics Engineering (undergrad degree)
+\item Aerospace Engineering (undergrad degree)
+\item Industrial Engineering
+\item Humanities and Sciences
+\item Professional Continuing Education
+\end{enumerate}
+\end{frame}
+
+
+%=======================
+\subsection{\ \ \ \ Labs}
+%=======================
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Labs}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\vspace{0.1in}
+\scriptsize Avionics
+\begin{enumerate}\scriptsize
+\item Basic
+\item Digital and Embedded Systems
+\item Guidance, Navigation, Controls
+\item Antenna and Electromagnetic
+\item Communications
+\item Radar
+\item Microwave
+\item PCB Prototyping
+\item Thermal Imaging
+\item Robotics and Computer Vision (set up last month)
+\end{enumerate}
+\scriptsize Aerospace
+\begin{enumerate}\scriptsize
+\item Aerodynamics
+\item Propulsion and Heat Transfer
+\item Structures
+\item Materials Science
+\item Numerical Analysis
+\item Aerospace Project
+\end{enumerate}
+\scriptsize Industrial Engineering workshop, Physics Lab, Chemistry Lab
+\end{frame}
+
+
+
+
+
+
+
+
+%=======================
+\subsection{\ \ \ \ Projects}
+%=======================
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Avionics Projects}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+RF/Microwave
+\begin{enumerate}\scriptsize
+\item Design and fabrication of a miniaturized phased array antenna for wi-fi application
+\item Reverse engineering of RF power amplifier used in radar transmitter module phase-II
+\item Design and development of wireless clock synchronization system
+\item Design and fabrication of rf front end receiver for software defined radio: (RF part 1)
+\item Design and development of a microstrip phased array antenna for electronic beam steering
+\item Design and simulation of optical circulator using various numerical algorithms
+\end{enumerate}
+Laser/IR
+\begin{enumerate}\scriptsize
+\item Design and experimental demonstration of laser based remote listening technique
+\item Design and development of improved IR parameter security system
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Avionics Projects \tiny cont.}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+Communications
+\begin{enumerate}\scriptsize
+\item Development of an IP based voice communication system using open source software PBX on an embedded platform
+\item Simulation and evaluation of modulation and channel coding schemes in jamming
+\item Design and development of software/digital part ofsoftware defined radio kit: phase II
+\item Design and development of an FPGA based cryptographic system
+\end{enumerate}
+Radars
+\begin{enumerate}\scriptsize
+\item Design and replacement of digital portion of MPDR-45E radar receiver with an embedded processing platform
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Avionics Projects \tiny cont.}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+Electronic Design
+\begin{enumerate}\scriptsize
+\item Design and development of microcontroller based wireless control and monitoring system for various sensors
+\item Study of Spartan-3 FPGA kit and its indigenous development phase-I
+\item Design and fabrication of microcontroller based four channel data logger
+\item Design and development of inductance and capacitance measuring device phase-II
+\end{enumerate}
+Power
+\begin{enumerate}\scriptsize
+\item Design and development of a solar charge controller for maximum power transfer
+\item Development of an algorithm for state of health (SOH) estimation of lead acid batteries used in UPS
+\item Design and fabrication of low cost and energy efficient solar tracker
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Avionics Projects \tiny cont.}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+Signal Processing
+\begin{enumerate}\scriptsize
+\item {\color{blue}Audio classifier based gender recognition system}
+\end{enumerate}
+Computer Vision
+\begin{enumerate}\scriptsize
+\item {\color{blue}Automated anomaly detection in vehicle undercarriage inspection}
+\item Fast normalized cross-correlation based visual target tracking on an embedded platform
+\end{enumerate}
+Aircraft
+\begin{enumerate}\scriptsize
+\item Development of a test rig for aircraft electrical harnesses
+\item Development of algorithm for fault prediction in JF-17 aircraft engine using sensor database-Phase II
+\end{enumerate}
+Software
+\begin{enumerate}\scriptsize
+\item Development of e-learning facility using webcam based cctv camera and open source e-learning environment
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Avionics Projects \tiny cont.}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+Aerial Robotics
+\begin{enumerate}\scriptsize
+\item Image based navigation of multiple Quadrotor UAVs on a centralized GPU powered server
+\item Design and implementation of navigation and control system for a tri turbofan airship
+\item Design and simulation of automatic takeoff and landing system for a fixed wing UAV
+\end{enumerate}
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Aerospace Projects}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{changemargin}{-0.3in}{0in}
+\begin{enumerate}\scriptsize
+\item {\color{blue}Modeling and simulation of a 6-DOFs flight simulator platform}
+\item {\color{blue}Geometric modeling, simulation and dynamic structural analysis of a flapping wing propelled micro air vehicle (MAV)}
+\item Development of static aeroelastic analysis with an interactive GUI in matlab
+\item Design and contruction of ground water source air-conditioning system
+\item Radar cross section evaluation of scaled down electromagnetic model of JF-17
+\item Development of code for simulation of resin flow to identify the flow front
+\item Development of Fortran code to solve compressible flow over flat plate at different AoA
+\item {\color{blue}Modeling and simulation of flight control system of Mushshak in matlab}
+\item Testing and implementation of run of the river power generation system
+\item Structural health monitoring program for a typical fighter aircraft
+\item Development of Labview based data acquisition software for the subsonic windtunnel
+\item {\color{blue}Designing and fabrication of robotic arm for spray painting}
+\item To determine the mechanical properties of different matrix materials
+\item Investigation and recommendation of viable solutions for frequent failure of S-pipe of mirage aircraft
+\end{enumerate}
+\end{changemargin}
+\end{frame}
+
+%=======================
+\subsection{\ \ \ \ Faculty}
+%=======================
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Faculty}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{itemize}
+\item 24 PhDs
+\begin{itemize}
+\item One or more PhD in every area mentioned
+\end{itemize}
+\item 38 Masters
+\end{itemize}
+\end{frame}
+
+
+
+%=======================
+\subsection{\ \ \ \ Robotics}
+%=======================
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Robotics}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{enumerate}\scriptsize
+\item Every semester, approximately 5 to 6 projects are launched 
+\begin{itemize}\scriptsize
+\item Not much continuity in these projects
+\item Robotics and Computer Vision Lab established last month to address this issue
+\end{itemize}
+\item No graduate students
+\item Student emphasis is only partly on academics
+\end{enumerate}
+\begin{itemize}
+\item Future Flight Design, Turkey 2011
+\begin{itemize}
+\item Dr Messam Abbas (team lead)
+\item PAF UAV Buraq
+\item Design: 1st place among 58 countries, beating US and Korea
+\end{itemize}
+\item Regular participant at GIKI contests and regularly win prizes in engine driven and electric powered categories
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Robotics: 1. Dr Tauseef-ur-Rehman (2010)}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{itemize}\scriptsize
+\item Multiple AR.Drone Parrot Quadrotors
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figs/quadcopter.png}
+\end{figure}
+\item Automatic navigation using computer vision
+\item Big map of Islamabad printed on panaflex
+\item Navigation using down-looking camera
+\end{itemize}
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{figs/temp_Quadrotor_GUI.png}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Robotics: 2. Mr Mansoor (2010)}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{itemize}
+\item Autonomous flight using blimps
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figs/blimp.png}
+\end{figure}
+\end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{CAE}
+\framesubtitle{Robotics: 3.  Dr Salman Aslam (2012)}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{enumerate}\scriptsize
+\item Autonomous helicopter
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figs/helicopter.png}
+\end{figure}
+\item Obstacle avoiding ground vehicle
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{figs/car.png}
+\end{figure}
+\item 3D surface reconstruction (for robotic applications, using Kinect)
+\item 3D face recognition (security)
+\item Controller design for CNC machine (manufacturing)
+\end{enumerate}
+\end{frame}
+
+
+
+
+
+
+
+%####################################################################################################
+\section{Target tracking using RVQ}
+%####################################################################################################
+%==========================
+\subsection{\ \ \ \ Tracking}
+%==========================
+
+\begin{frame}
+\frametitle{Tracking}
+\framesubtitle{definition}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+Estimate and maintain {\color{red}target state} over {\color{red}time}
+\begin{figure}
+\includegraphics[width=1.0\textwidth]{thesis/TRK_overviewDiagram.pdf}
+\end{figure}
+\vspace{0.2in}
+2 step process
+\begin{itemize}
+\item Prediction: predict states using model
+\item Update: correction applied to prediction after observation arrives
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Tracking}
+\framesubtitle{Step 1 of 2: prediction (Chapman Kolmogorov)}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{table}
+\begin{tabular}{|l|l|}\hline
+$x_k$ & state at time $k$\\\hline
+$Z_{k-1}$ &  all observations till time $k-1$\\\hline
+\end{tabular}
+\end{table}
+\begin{figure}
+\includegraphics[width=1.0\textwidth]{thesis/TRK_EQN_prediction.pdf}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Tracking}
+\framesubtitle{Step 2 of 2: update}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{figure}
+\includegraphics[height=0.8\textheight]{thesis/TRK_EQN_update.pdf}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Tracking}
+\framesubtitle{Example: 1D tracking with particle filter}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{figure}
+\includegraphics[width=1.0\textwidth]{thesis/TRK_ParticleFilter_multimodalPDF.pdf}
+\end{figure}	
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Tracking}
+\framesubtitle{probabilistic graphical models}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+	\begin{figure}
+		\includegraphics[width=0.9\textwidth]{thesis/PRML_PGM_overview.pdf}
+	\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Visual tracking}
+\framesubtitle{components\tiny{\footnote {Yilmaz et.al., 2006}}}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{figure}
+\includegraphics[height=0.8\textheight]{thesis/TRK_overview.pdf}
+\end{figure}	
+\end{frame}
+
+
+%==========================
+\subsection{\ \ \ \ RVQ}
+%==========================
+
+\begin{frame}
+\frametitle{RVQ}
+\framesubtitle{}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\vspace{0.2in}
+\begin{itemize}\scriptsize
+\item {\color{red}Vector Quantization}
+\begin{itemize}\scriptsize
+\item used in a variety of signal processing applications
+\item design algorithm is known as Linde-Buzo-Gray (LBG) in signal processing community
+\item known as K-means clustering in Computer Vision and PRML communities
+\end{itemize}
+\item {\color{red}Residual Vector Quantization}
+\begin{itemize}\scriptsize
+\item 1996: Developed by Dr Barnes (and later patented)
+\item 2007: First successful application as a pattern recognition method for images
+\end{itemize}
+\end{itemize}
+\begin{figure}
+\includegraphics[width=0.73\textwidth]{thesis/professors.pdf}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{RVQ}
+\framesubtitle{sample codebook (simple)}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.5\textwidth]{thesis/RVQ_introduction.pdf}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{RVQ}
+\framesubtitle{sample 8x4 codebook}
+\logoCSIPCPL\mypagenum
+\setcounter{subfigure}{0}
+\begin{figure}[h!]
+\centering\subfigure{\includegraphics[height=0.41in]{thesis/seq_1_Dudek.png}\label{fig:trk_pca_1a}}
+\subfigure{\includegraphics[height=0.65\textheight]{thesis/1_Dudek__aRVQ_08_04_1000_0_RofE__170_codebook.pdf}
+}
+\end{figure}
+\end{frame}
+
+
+
+%==========================
+\subsection{\ \ \ \ Prior work}
+%==========================
+
+\begin{frame}
+\frametitle{Region tracking}
+\framesubtitle{Subspace tracking: prior work}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\vspace{0.1in}
+1998: first work on subspace tracking
+	\begin{figure}
+		\includegraphics[width=0.6\textwidth]{thesis/TrackingPapers_SubspaceTracking_1998_Black_fig9.png}
+	\end{figure}
+\myFootnoteCitation{1998_JNL_Eigentracking_Black}{IJCV}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Region tracking}
+\framesubtitle{Subspace tracking: prior work}
+\logoCSIPCPL\mypagenum
+\vspace{0.1in}
+2008: 10 years later, state of the art in subspace tracking
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{thesis/TrackingPapers_SubspaceTracking_2008_Ross_fig10.png}
+\end{figure}
+\myFootnoteCitation{2008_JNL_subspaceTRK_Ross}{IJCV}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+\frametitle{Image classification\footnote{Barnes, 2007}}
+\framesubtitle{\small Satellite imagery: pre-Tsunami Sri Lanka \\(training phase)}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+	\begin{figure}		
+		\includegraphics[height=0.3\textheight]{thesis/RVQ_SatelliteSriLanka_1_snippets.png}			
+	\end{figure}
+	\begin{figure}		
+		\includegraphics[height=0.35\textheight]{thesis/RVQ_SatelliteSriLanka_2_codebooks.png}			
+	\end{figure}
+\end{frame}
+
+
+%==========================
+\subsection{\ \ \ \ Results}
+%==========================
+
+\begin{frame}
+\frametitle{Publicly available datasets\footnote{Ross et. al. 2008}}
+\framesubtitle{Dudek, davidin300, sylv, fish, car4, car11}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\setcounter{subfigure}{0}
+\begin{figure}[h!]
+\centering\subfigure{\includegraphics[height=0.41in]{thesis/seq_1_Dudek.png}\label{fig:trk_pca_1a}}
+\subfigure{\includegraphics[height=0.41in]{thesis/seq_2_davidin300.png}\label{fig:trk_pca_1b}}
+\subfigure{\includegraphics[height=0.41in]{thesis/seq_3_sylv.png}\label{fig:trk_pca_1c}}
+\subfigure{\includegraphics[height=0.41in]{thesis/seq_5_fish.png}\label{fig:trk_pca_1d}}
+\subfigure{\includegraphics[height=0.41in]{thesis/seq_6_car4.png}\label{fig:trk_pca_1d}}
+\subfigure{\includegraphics[height=0.41in]{thesis/seq_7_car11.png}\label{fig:trk_pca_1d}}
+\label{fig:trk_sequences}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Target motion}
+\framesubtitle{Generating track candidates: run-time}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+Use random affine deformation to model motion
+\begin{itemize}
+\item Perturb affine parameters
+\item For each affine set, 
+\begin{itemize}
+\item apply forward affine transform on zero-centered canonical grid 
+\item bilinear interpolation to extract ROI, one per affine set, as shown below
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.35\textwidth]{thesis/affineCandidates.pdf}
+\label{Fig:affine_candidates}
+\end{figure}
+\end{itemize}
+\item For set corresponding to least reconstruction error, apply forward affine transform to $(\mathbf{x, y})$ and compare with ground truth to get track error
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Results}
+\framesubtitle{best tracking performance}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\setcounter{subfigure}{0}
+\begin{figure}[t]
+\centering
+\scriptsize
+\input{thesis/results_final_1_best}
+\subfigure[Best tracking error for each algorithm.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_1a_best.pdf}\label{fig:results_final_1a_best}}\hspace{0.1in}
+\subfigure[\%age of datasets over which best tracking error is achieved over all parameters.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_1b_best_percent.pdf}\label{fig:results_final_1b_best_percent}}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{Results}
+\framesubtitle{mean performance}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\setcounter{subfigure}{0}
+\begin{figure}[t]
+\centering
+\scriptsize
+\input{thesis/results_final_2_mean}
+\subfigure[Mean tracking error for each algorithm.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_2a_mean.pdf}\label{fig:results_final_2a_mean}}\hspace{0.1in}
+\subfigure[\%age of datasets over which best mean tracking error is achieved over all parameters.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_2b_mean_percent.pdf}\label{fig:results_final_2b_mean_percent}}
+\label{fig:results_final_2_mean}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Results}
+\framesubtitle{memory=16 vectors}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\setcounter{subfigure}{0}
+\begin{figure}[t]
+\centering
+\scriptsize
+\input{thesis/results_final_3_16}
+\subfigure[Tracking error for each algorithm with 16 eigenvectors/code-vectors stored in memory.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_3a_16.pdf}\label{fig:results_final_3a_16}}\hspace{0.1in}
+\subfigure[\%age of datasets over which best tracking error is achieved with 16 eigenvectors/code-vectors stored in memory.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_3b_16_percent.pdf}\label{fig:results_final_3b_16_percent}}
+\label{fig:results_final_3_16}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Results}
+\framesubtitle{memory=32 vectors}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\setcounter{subfigure}{0}
+\begin{figure}[t]
+\centering
+\scriptsize
+\input{thesis/results_final_4_32}
+\subfigure[Tracking error for each algorithm with 32 eigenvectors/code-vectors stored in memory.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_4a_32.pdf}\label{fig:results_final_4a_32}}\hspace{0.1in}
+\subfigure[\%age of datasets over which best tracking error is achieved with 32 eigenvectors/code-vectors stored in memory.]{\includegraphics[width=0.47\textwidth]{thesis/results_final_4b_32_percent.pdf}\label{fig:results_final_4b_32_percent}}
+\label{fig:results_final_4_32}
+\end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}
+\frametitle{Open source}
+\framesubtitle{}
+\mypagenum\ifthenelse{\boolean{ShowOverlays}}{\logoCAE}{}
+\setcounter{subfigure}{0}
+\begin{itemize}
+\item All PhD work released under open source license
+\item git clone, or download as zip
+{\color{blue}\underline{\url{https://github.com/SalmanAslamPhD/phd}}}
+\begin{figure}
+\includegraphics[width=0.9\textwidth]{thesis/github.png}
+\end{figure}
+\item To run tracker, run main.m
+\end{itemize}
+\end{frame}
+
+
+
+
+
+%####################################################################################################
+\end{document}
+%####################################################################################################
+
